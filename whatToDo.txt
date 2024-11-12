@@ -1,0 +1,9 @@
+-we must have a game
+-we must have players
+-players should be added to the game
+-players have scores
+-players have strike
+-players have bonus rolls = each play
+-every player plays twice in every turn
+-game has rules
+-game has number of turns 
