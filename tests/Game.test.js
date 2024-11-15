@@ -42,7 +42,6 @@ describe("BowlingGameRules", () => {
     game.addPlayer(new Player());
     game.executeRound();
     const players = game.getPlayers();
-
     expect(players[0].numberOfRolls).toBe(0);
   });
 
@@ -61,7 +60,7 @@ describe("BowlingGameRules", () => {
   test("first player have exactly one score after first round", () => {
     const game = new Game();
 
-    game.addPlayer(new Player());
+    game.addPlayer(new Player("Adam", 1));
     game.executeRound();
     const players = game.getPlayers();
 
@@ -86,8 +85,25 @@ describe("BowlingGameRules", () => {
     expect(players[0].name).toBe("player1");
     expect(players[1].name).toBe("player2");
   });
+
+  test("if player scores 10 in two rolls should have one spare", () => {
+    const game = new Game();
+    game.addPlayer(new Player("Sanyi",5,5));
+    game.executeRound()
+    const players = game.getPlayers();
+
+    expect(players[0].spare).toBe(1)
+  });
+
+  test("if player scores 10 in one roll should have one strike", () => {
+    const game = new Game();
+    game.addPlayer(new Player("Sanyika",10));
+    game.executeRound()
+    const players = game.getPlayers();
+
+    expect(players[0].strike).toBe(1)
+  });
 });
 
-//test first player shoots have 1 spare if strikes
 //test first player have no bonus roll without strike aftet tenth round
 //test player 1 strikes once, in the tenth round and gets one bonus roll

@@ -12,8 +12,8 @@ export default class Game {
   }
   executeRound() {
     this.players.forEach((player) => {
-      player.rollBowl(1);
-      player.rollBowl(0);
+      player.rollBowl();
+      player.rollBowl();
     });
     this.remainingTurns -= 1;
   }
