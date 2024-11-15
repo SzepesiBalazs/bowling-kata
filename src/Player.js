@@ -9,4 +9,10 @@ export default class Player {
     this.numberOfRolls -= 1;
     this.score += score;
   }
+
+  createUniqueName(numberOfPlayers) {
+    if (this.name === "") {
+      this.name = "player" + (numberOfPlayers + 1);
+    }
+  }
 }

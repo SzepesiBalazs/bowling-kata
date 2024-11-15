@@ -76,10 +76,18 @@ describe("BowlingGameRules", () => {
 
     expect(players[0].name).toBe("Balazs");
   });
+
+  test("both players should have a unique default name", () => {
+    const game = new Game();
+    game.addPlayer(new Player());
+    game.addPlayer(new Player());
+    const players = game.getPlayers();
+
+    expect(players[0].name).toBe("player1");
+    expect(players[1].name).toBe("player2");
+  });
 });
 
-//test first player should have a name
-//test each player has a unique name as default
 //test first player shoots have 1 spare if strikes
 //test first player have no bonus roll without strike aftet tenth round
 //test player 1 strikes once, in the tenth round and gets one bonus roll
