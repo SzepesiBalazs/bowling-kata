@@ -14,26 +14,27 @@ export default class Player {
     this.score += this.numberOfRolls === 2 ? this.roll1 : this.roll2;
     this.numberOfRolls -= 1;
 
-    if (this.score === 10) {
-      this.numberOfRolls === 1 ? (this.strike = 1) : (this.spare = 1);
-    }
-
     if (this.numberOfRolls === 1) {
       if (this.spare === 1) {
-        this.spare = 0
-        this.totalScore += 10 + this.roll1;
+        this.spare = 0;
+        this.totalScore += 10 + (this.roll1 * 2);
       } else {
         this.totalScore += this.roll1;
       }
-      this.roll1 = 0;
     }
 
     if (this.numberOfRolls === 0) {
       if (this.score < 10) {
         this.totalScore += this.roll2;
       }
-      this.roll2 = 0;
-      this.score = 0;
+      else{
+        this.totalScore -= this.roll1
+        this.spare = 1;
+      }
+    }
+
+    if (this.score === 10) {
+      this.numberOfRolls === 1 ? (this.strike = 1) : (this.spare = 1);
     }
   }
 

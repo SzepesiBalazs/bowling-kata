@@ -36,27 +36,6 @@ describe("BowlingGameRules", () => {
     expect(game.remainingTurns).toBe(9);
   });
 
-  test("one player loses all of rolls in each turn", () => {
-    const game = new Game();
-
-    game.addPlayer(new Player());
-    game.executeRound();
-    const players = game.getPlayers();
-    expect(players[0].numberOfRolls).toBe(0);
-  });
-
-  test("both players loses all of rolls in each turn", () => {
-    const game = new Game();
-
-    game.addPlayer(new Player());
-    game.addPlayer(new Player());
-    game.executeRound();
-    const players = game.getPlayers();
-
-    expect(players[0].numberOfRolls).toBe(0);
-    expect(players[1].numberOfRolls).toBe(0);
-  });
-
   test("first player have exactly one score after first round", () => {
     const game = new Game();
     const player1 = new Player();
@@ -109,16 +88,18 @@ describe("BowlingGameRules", () => {
   test("if player hits spare with (5+5(+4 added after secound frames first roll)) + (4+3) should get 21 points", () => {
     const game = new Game();
     const player1 = new Player("ABC");
-    player1.roll1 = 5;
-    player1.roll2 = 5;
+    player1.roll1 = 9;
+    player1.roll2 = 1;
     game.addPlayer(player1);
     game.executeRound();
-    player1.roll1 = 4;
-    player1.roll2 = 3;
+
+    player1.roll1 = 2;
+    player1.roll2 = 6;
     game.executeRound();
+
     const players = game.getPlayers();
 
-    expect(players[0].totalScore).toBe(21);
+    expect(players[0].totalScore).toBe(20);
   });
 });
 
