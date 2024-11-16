@@ -59,12 +59,14 @@ describe("BowlingGameRules", () => {
 
   test("first player have exactly one score after first round", () => {
     const game = new Game();
+    const player1 = new Player();
 
-    game.addPlayer(new Player("Adam", 1));
+    game.addPlayer(player1);
+    player1.roll1 = 1
     game.executeRound();
     const players = game.getPlayers();
 
-    expect(players[0].score).toBe(1);
+    expect(players[0].totalScore).toBe(1);
   });
 
   test("first player should have a name", () => {
@@ -88,20 +90,35 @@ describe("BowlingGameRules", () => {
 
   test("if player scores 10 in two rolls should have one spare", () => {
     const game = new Game();
-    game.addPlayer(new Player("Sanyi",5,5));
-    game.executeRound()
+    game.addPlayer(new Player("Sanyi", 5, 5));
+    game.executeRound();
     const players = game.getPlayers();
 
-    expect(players[0].spare).toBe(1)
+    expect(players[0].spare).toBe(1);
   });
 
   test("if player scores 10 in one roll should have one strike", () => {
     const game = new Game();
-    game.addPlayer(new Player("Sanyika",10));
-    game.executeRound()
+    game.addPlayer(new Player("Sanyika", 10));
+    game.executeRound();
     const players = game.getPlayers();
 
-    expect(players[0].strike).toBe(1)
+    expect(players[0].strike).toBe(1);
+  });
+
+  test("if player hits spare with (5+5(+4 added after secound frames first roll)) + (4+3) should get 21 points", () => {
+    const game = new Game();
+    const player1 = new Player("ABC");
+    player1.roll1 = 5;
+    player1.roll2 = 5;
+    game.addPlayer(player1);
+    game.executeRound();
+    player1.roll1 = 4;
+    player1.roll2 = 3;
+    game.executeRound();
+    const players = game.getPlayers();
+
+    expect(players[0].totalScore).toBe(21);
   });
 });
 
