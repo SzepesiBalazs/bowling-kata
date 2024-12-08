@@ -139,4 +139,4 @@ describe("BowlingGameRules", () => {
 });
 
 //test first player have no bonus roll without strike aftet tenth round
-//test player 1 strikes once, in the tenth round and gets one bonus roll
+
