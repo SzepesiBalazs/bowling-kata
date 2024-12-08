@@ -32,13 +32,12 @@ export default class Player {
   }
 
   totalScoreAfterSecondRoll() {
-    console.log("test");
     if (this.score < 10) {
       if (this.strike > 0) {
-        this.strike -= 1;
-        this.totalScore += (10 + this.score * 2);
-        console.log("before+10", this.score * 2);
-        console.log("aftre+10", 10 + this.score * 2);
+        for (let index = 0; index <= this.strike; index++) {
+          this.strike -= 1;
+          this.totalScore += 10 + this.score * 2;
+        }
       } else {
         this.totalScore += this.roll2;
       }
@@ -62,9 +61,7 @@ export default class Player {
     if (this.spare === 1) {
       this.spare = 0;
       this.totalScore += 10 + this.roll1 * 2;
-    } else if (this.strike > 0){
-      this.totalScore -= 10;
-    } else {
+    } else if (this.roll1 < 10 && this.strike <= 0) {
       this.totalScore += this.roll1;
     }
   }

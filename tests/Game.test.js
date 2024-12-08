@@ -117,6 +117,25 @@ describe("BowlingGameRules", () => {
 
     expect(players[0].totalScore).toBe(26);
   });
+
+  test("if player hits 2 strikes in a row, after that in the next round rolls 2, 3 he should get 40 points (10+(10+10)+((3+2*2)))", () => {
+    const game = new Game();
+    const player1 = new Player("ABC");
+    player1.roll1 = 10;
+    game.addPlayer(player1);
+    game.executeRound();
+
+    player1.roll1 = 10;
+    game.executeRound();
+
+    player1.roll1 = 3;
+    player1.roll2 = 2;
+    game.executeRound();
+
+    const players = game.getPlayers();
+
+    expect(players[0].totalScore).toBe(40);
+  });
 });
 
 //test first player have no bonus roll without strike aftet tenth round
