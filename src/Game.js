@@ -13,11 +13,14 @@ export default class Game {
   executeRound() {
     this.players.forEach((player) => {
       player.rollBowl();
-      player.rollBowl();
-      player.roll1 = 0
-      player.roll2 = 0
-      player.score = 0
+      if (player.roll1 < 10) {
+        player.rollBowl();
+      }
+      player.roll1 = 0;
+      player.roll2 = 0;
+      player.score = 0;
       player.numberOfRolls = 2;
+      console.log('player', player)
     });
     this.remainingTurns -= 1;
   }

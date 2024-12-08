@@ -11,36 +11,61 @@ export default class Player {
   }
 
   rollBowl() {
-    this.score += this.numberOfRolls === 2 ? this.roll1 : this.roll2;
+    this.calculateRoundScore();
     this.numberOfRolls -= 1;
 
     if (this.numberOfRolls === 1) {
-      if (this.spare === 1) {
-        this.spare = 0;
-        this.totalScore += 10 + (this.roll1 * 2);
-      } else {
-        this.totalScore += this.roll1;
-      }
+      this.totalScoreAfterFirstRoll();
     }
 
     if (this.numberOfRolls === 0) {
-      if (this.score < 10) {
-        this.totalScore += this.roll2;
-      }
-      else{
-        this.totalScore -= this.roll1
-        this.spare = 1;
-      }
+      this.totalScoreAfterSecondRoll();
     }
 
     if (this.score === 10) {
-      this.numberOfRolls === 1 ? (this.strike = 1) : (this.spare = 1);
+      this.strikeOrSpare();
     }
+  }
+
+  strikeOrSpare() {
+    this.numberOfRolls === 1 ? (this.strike += 1) : (this.spare = 1);
+  }
+
+  totalScoreAfterSecondRoll() {
+    console.log("test");
+    if (this.score < 10) {
+      if (this.strike > 0) {
+        this.strike -= 1;
+        this.totalScore += (10 + this.score * 2);
+        console.log("before+10", this.score * 2);
+        console.log("aftre+10", 10 + this.score * 2);
+      } else {
+        this.totalScore += this.roll2;
+      }
+    } else {
+      this.totalScore -= this.roll1;
+      this.spare = 1;
+    }
+  }
+
+  calculateRoundScore() {
+    this.score += this.numberOfRolls === 2 ? this.roll1 : this.roll2;
   }
 
   createUniqueName(numberOfPlayers) {
     if (this.name === "") {
       this.name = "player" + (numberOfPlayers + 1);
+    }
+  }
+
+  totalScoreAfterFirstRoll() {
+    if (this.spare === 1) {
+      this.spare = 0;
+      this.totalScore += 10 + this.roll1 * 2;
+    } else if (this.strike > 0){
+      this.totalScore -= 10;
+    } else {
+      this.totalScore += this.roll1;
     }
   }
 

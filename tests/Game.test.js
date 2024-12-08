@@ -41,7 +41,7 @@ describe("BowlingGameRules", () => {
     const player1 = new Player();
 
     game.addPlayer(player1);
-    player1.roll1 = 1
+    player1.roll1 = 1;
     game.executeRound();
     const players = game.getPlayers();
 
@@ -100,6 +100,22 @@ describe("BowlingGameRules", () => {
     const players = game.getPlayers();
 
     expect(players[0].totalScore).toBe(20);
+  });
+
+  test("if player hits strike, next round rolls 7, 1 he should get 26 points (10+7+1 +7+1)", () => {
+    const game = new Game();
+    const player1 = new Player("ABC");
+    player1.roll1 = 10;
+    game.addPlayer(player1);
+    game.executeRound();
+
+    player1.roll1 = 7;
+    player1.roll2 = 1;
+    game.executeRound();
+
+    const players = game.getPlayers();
+
+    expect(players[0].totalScore).toBe(26);
   });
 });
 
